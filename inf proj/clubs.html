@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUST Student Clubs</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        :root {
+            /* MUST Official Colors */
+            --primary: rgb(28, 48, 110);
+            /* MUST Blue */
+            --secondary: rgb(0, 172, 92);
+            /* MUST Green */
+            --primary-light: rgba(28, 48, 110, 0.1);
+            --secondary-hover: #1a6340;
+
+            --bg-light: #f5f6f8;
+            --white: #FFFFFF;
+            --text-dark: #333333;
+            --text-gray: #555555;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ================= CLUB SECTION ================= */
+        .clubs-section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .clubs-section h1 {
+            color: var(--primary);
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        /* ================= CLUBS GRID ================= */
+        .clubs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .club-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            overflow: hidden;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .club-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .club-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .club-card h3 {
+            margin: 0 0 10px;
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+
+        .club-card p {
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.6;
+            flex-grow: 1;
+            /* Pushes the button to the bottom */
+            margin-bottom: 15px;
+        }
+
+        /* ================= CONTACT & BUTTONS ================= */
+        .phone {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 12px 0 20px;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .phone i {
+            color: var(--secondary);
+        }
+
+        .join-btn {
+            background: var(--secondary);
+            border: none;
+            padding: 0;
+            /* Remove padding to let anchor tag fill it */
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .join-btn a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 12px;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .join-btn:hover {
+            background: var(--secondary-hover);
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="clubs-section">
+        <h1>Student Clubs at MUST</h1>
+
+        <div class="clubs-grid">
+
+            <div class="club-card">
+                <img src="img/efc37c52370be41bfc2131f8ccf3b300.jpg" alt="GDG Club" class="club-img">
+                <h3>GDG</h3>
+                <p>GDG is the Google Developer Student Club at MUST. Members learn Google technologies, build web and
+                    mobile applications, and collaborate on real-world projects. The club hosts workshops, hackathons,
+                    and mentoring sessions to develop technical skills and network with tech peers.</p>
+                <div class="phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>01012345678</span>
+                </div>
+                <button class="join-btn">
+                    <a href="../Sports/Register Team.html">Registration</a>
+                </button>
+            </div>
+
+            <div class="club-card">
+                <img src="img/161c339b45e5a463d06d5e82d2b3c727.jpg" alt="IEEE Club" class="club-img">
+                <h3>IEEE</h3>
+                <p>IEEE is the global engineering and technology club at MUST. It supports members through seminars,
+                    robotics projects, and research events. The club encourages innovation in electronics,
+                    communications, and AI, building professional networks and technical skills.</p>
+                <div class="phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>01012345678</span>
+                </div>
+                <button class="join-btn">
+                    <a href="../Sports/Register Team.html">Registration</a>
+                </button>
+            </div>
+
+            <div class="club-card">
+                <img src="img/ce3b7fd7ed467b1ae0ea8f8634264750.jpg" alt="CPC Club" class="club-img">
+                <h3>CPC</h3>
+                <p>CPC is the Competitive Programming Club at MUST. It brings together students who love coding,
+                    problem-solving, and software development. The club organizes programming contests, collaborative
+                    projects, and training sessions to improve coding fluency.</p>
+                <div class="phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>01012345678</span>
+                </div>
+                <button class="join-btn">
+                    <a href="../Sports/Register Team.html">Registration</a>
+                </button>
+            </div>
+
+            <div class="club-card">
+                <img src="img/image.png" alt="Cyber MUST Club" class="club-img">
+                <h3>Cyber MUST</h3>
+                <p>Cyber MUST is the student cybersecurity club at MUST. It focuses on ethical hacking, digital defense,
+                    and cybersecurity research. Members train in CTF challenges, threat analysis, and security labs to
+                    build strong protection skills for cyber careers.</p>
+                <div class="phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>01012345678</span>
+                </div>
+                <button class="join-btn">
+                    <a href="../Sports/Register Team.html">Registration</a>
+                </button>
+            </div>
+
+            <div class="club-card">
+                <img src="img/7b83481a4cf0c574be1e71dd0294121e.jpg" alt="Music Club" class="club-img">
+                <h3>Music Club</h3>
+                <p>The Music Club is a place for students who love music and creativity. Members can sing, play
+                    instruments, and learn about different types of music. We practice together, share talents, and
+                    prepare performances to improve confidence and artistic skills.</p>
+                <div class="phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>01012345678</span>
+                </div>
+                <button class="join-btn">
+                    <a href="../Sports/Register Team.html">Registration</a>
+                </button>
+            </div>
+
+            <div class="club-card">
+                <img src="img/652ace1cd16de53a5c067c0d51cb1e97.jpg" alt="Art Club" class="club-img">
+                <h3>Art Club</h3>
+                <p>The Art Club is a creative space for students who love drawing, painting, and expressing ideas
+                    through art. Members explore different styles using colors, pencils, and digital tools. We work on
+                    projects to develop creativity, imagination, and confidence.</p>
+                <div class="phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>01012345678</span>
+                </div>
+                <button class="join-btn">
+                    <a href="../Sports/Register Team.html">Registration</a>
+                </button>
+            </div>
+
+            <div class="club-card">
+                <img src="img/image.png" alt="Huawei AI Club" class="club-img">
+                <h3>Huawei AI Club</h3>
+                <p>The MUST AI Club is a certified training center qualifying students in Artificial Intelligence and
+                    Deep Learning using Huawei tools like ModelArts. Activities include HCIA-AI prep camps, practical
+                    projects, and the Huawei ICT Competition.</p>
+                <div class="phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>01012345678</span>
+                </div>
+                <button class="join-btn">
+                    <a href="../Sports/Register Team.html">Registration</a>
+                </button>
+            </div>
+
+            <div class="club-card">
+                <img src="img/image.png" alt="Huawei Academy - MUST" class="club-img">
+                <h3>Huawei Academy</h3>
+                <p>Huawei Academy at MUST provides certified training connecting university studies with the job market
+                    in Cloud, AI, Security, and Datacom. Activities include certified courses, summer internships, job
+                    opportunities, and tech seminars with global experts.</p>
+                <div class="phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>01012345678</span>
+                </div>
+                <button class="join-btn">
+                    <a href="../Sports/Register Team.html">Registration</a>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+
+</html>

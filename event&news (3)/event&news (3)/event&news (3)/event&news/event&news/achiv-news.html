@@ -1,0 +1,548 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUST Student Activities Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        :root {
+            /* MUST Official Colors */
+            --primary: rgb(28, 48, 110);   /* MUST Blue */
+            --secondary: rgb(0, 172, 92);  /* MUST Green */
+            --primary-light: rgba(28, 48, 110, 0.1);
+            --secondary-light: rgba(0, 172, 92, 0.1);
+            --secondary-hover: rgb(0, 145, 75);
+            
+            --bg-light: #F8FAFC;
+            --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-gray: #64748B;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+
+        /* Announcement Ticker */
+        .announcement-bar {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 0.4rem 0;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .marquee {
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+            padding-left: 100%;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* ------------------ NAVBAR ------------------ */
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.5rem 2rem; /* Reduced padding slightly to accommodate logo */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* New Logo CSS for Header */
+        .Uni-logo {
+            height: 100px; /* Adjust height here for Navbar */
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links { 
+            display: flex; 
+            gap: 1.8rem; 
+            list-style: none; 
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--secondary); }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 1.2rem;
+        }
+        .nav-icons i, .nav-icons span {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .nav-icons i:hover, .nav-icons span:hover {
+            color: var(--secondary);
+        }
+        .separator {
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 300;
+        }
+
+        /* Buttons */
+        .btn {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 172, 92, 0.3);
+        }
+
+        /* Hero Carousel */
+        .carousel-container {
+            max-width: 1200px;
+            margin: 2rem auto 4rem;
+            position: relative;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .carousel-slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            padding: 4rem;
+            background-size: cover;
+            background-position: center;
+        }
+        .carousel-slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to right, rgba(28, 48, 110, 0.9) 0%, rgba(28, 48, 110, 0.4) 100%);
+            z-index: 1;
+        }
+        .carousel-slide.active { opacity: 1; z-index: 2; }
+        .slide-content {
+            position: relative;
+            z-index: 3;
+            max-width: 600px;
+            color: var(--white);
+        }
+        .slide-badge {
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .slide-content h1 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.2; }
+        .slide-content p { font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9; }
+        
+        .carousel-controls {
+            position: absolute; bottom: 2rem; right: 4rem; z-index: 3; display: flex; gap: 1rem;
+        }
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2); border: 2px solid white; color: white;
+            width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+            display: flex; justify-content: center; align-items: center; transition: var(--transition);
+        }
+        .control-btn:hover { background: var(--secondary); border-color: var(--secondary); }
+
+        /* Sections */
+        section { max-width: 1200px; margin: 5rem auto; padding: 0 2rem; }
+        .section-header { margin-bottom: 2.5rem; }
+        .section-header h2 { font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .section-header p { color: var(--text-gray); }
+
+        /* Categories */
+        .categories { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; }
+        .category-card {
+            background: var(--white); padding: 2rem 1rem; border-radius: 16px; text-align: center;
+            box-shadow: var(--shadow); transition: var(--transition); border: 1px solid #E2E8F0;
+            cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 1rem;
+        }
+        .category-icon {
+            width: 60px; height: 60px; background-color: var(--secondary-light); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; transition: var(--transition);
+        }
+        .category-icon i { font-size: 1.5rem; color: var(--secondary); }
+        .category-card h3 { color: var(--primary); font-size: 1.1rem; }
+        .category-card:hover { transform: translateY(-5px); border-color: var(--secondary); box-shadow: var(--shadow-lg); }
+        .category-card:hover .category-icon { background-color: var(--secondary); }
+        .category-card:hover .category-icon i { color: var(--white); }
+
+        /* Events Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .card {
+            background: var(--white); border-radius: 16px; overflow: hidden;
+            box-shadow: var(--shadow); border: 1px solid #E2E8F0; display: flex; flex-direction: column;
+        }
+        .card-date-box {
+            position: absolute; top: 1rem; left: 1rem; background: var(--white); padding: 0.5rem;
+            border-radius: 8px; text-align: center; min-width: 60px; box-shadow: var(--shadow);
+        }
+        .card-date-box .day { display: block; font-size: 1.5rem; font-weight: 700; color: var(--primary); line-height: 1; }
+        .card-date-box .month { display: block; font-size: 0.8rem; color: var(--secondary); font-weight: 600; text-transform: uppercase; }
+        .card-img { height: 200px; position: relative; background-color: var(--primary-light); background-size: cover; background-position: center; }
+        .card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .tag {
+            background-color: var(--primary-light); color: var(--primary);
+            padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.8rem; font-weight: 700;
+            display: inline-block; margin-bottom: 1rem; width: fit-content;
+        }
+        .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--primary); }
+        .card-info { display: flex; align-items: center; gap: 10px; color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .card-info i { color: var(--secondary); width: 16px; text-align: center; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #E2E8F0; padding-top: 1.2rem; margin-top: auto; }
+
+        /* ------------------ FOOTER ------------------ */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding-top: 4rem;
+            margin-top: 5rem;
+        }
+        .footer-logo-center {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        /* New Logo CSS for Footer */
+        .footer-brand-logo {
+            height: 120px; /* Adjust this value to make the footer logo bigger/smaller */
+            width: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 0 2rem 4rem 2rem;
+        }
+        .footer-col h4 {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.8rem; }
+        .footer-col ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .footer-col ul li a:hover { color: var(--secondary); }
+        .footer-col p {
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .footer-bottom {
+            background-color: var(--white);
+            color: var(--primary);
+            text-align: center;
+            padding: 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-links { display: none; } /* Hide links on smaller screens */
+            .categories { grid-template-columns: repeat(3, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .categories { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="announcement-bar ">
+        <div class="marquee">
+            <span>
+                🏆 MUST wins 1st place in the National Universities Hackathon! &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
+                ⏰ Reminder: Registration for the Luxor Trip closes this Thursday! &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 
+                🎭 Auditions for the University Theater Club open on March 15th. 
+            </span>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <img src="LoGo.png" alt="MUST Logo" class="Uni-logo">
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">The University</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#event">Events</a></li>
+                <li><a href="#">Youth Care</a></li>
+                <li><a href="#">Students Service</a></li>
+                <li><a href="clubs.html">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <i class="fa-regular fa-sun" title="Light/Dark Mode"></i>
+                <span class="separator">|</span>
+                <span style="font-family: Arial, sans-serif; font-weight: bold; font-size: 1.4rem;" title="Arabic">ع</span>
+                <i class="fa-solid fa-bars" style="font-size: 1.5rem;" title="Menu"></i>
+            </div>
+        </nav>
+    </header>
+
+  
+
+
+
+<section id="news" class="achiv-news">
+
+<div class="section-header text-center">
+<h2>Achievements</h2>
+
+</div>
+
+<div class="must-events-container">
+
+<div class="must-event-card">
+<div class="event-img">
+<img src="new-4.jpeg">
+<div class="event-date">
+<span>03</span>
+<p>Nov</p>
+</div>
+</div>
+
+<div class="event-content">
+<h3>The College of Nursing announces the upcoming workshop.</h3>
+
+<div class="event-meta">
+<span><i class="fa-regular fa-clock"></i> 11:00 AM</span>
+<span><i class="fa-solid fa-location-dot"></i> Nursing Hall</span>
+</div>
+
+<p>The College of Nursing announces the upcoming workshop.</p>
+
+</div>
+</div>
+
+
+<div class="must-event-card">
+<div class="event-img">
+<img src="new-5.jpeg">
+<div class="event-date">
+<span>06</span>
+<p>Nov</p>
+</div>
+</div>
+
+<div class="event-content">
+<h3>IT Conference</h3>
+
+<div class="event-meta">
+<span><i class="fa-regular fa-clock"></i> 5:00 PM</span>
+<span><i class="fa-solid fa-location-dot"></i> IT Building</span>
+</div>
+
+<p>Conference organized by the Faculty of Information Technology.</p>
+
+</div>
+</div>
+
+
+<div class="must-event-card">
+<div class="event-img">
+<img src="new-6.jpeg">
+<div class="event-date">
+<span>09</span>
+<p>Dec</p>
+</div>
+</div>
+
+<div class="event-content">
+<h3>Annual Scientific Day</h3>
+
+<div class="event-meta">
+<span><i class="fa-regular fa-clock"></i> 10:00 AM</span>
+<span><i class="fa-solid fa-location-dot"></i> BioTech Hall</span>
+</div>
+
+<p>Annual scientific day of the College of Biotechnology.</p>
+
+</div>
+</div>
+
+
+<div class="must-event-card">
+<div class="event-img">
+<img src="new7.jpeg">
+<div class="event-date">
+<span>04</span>
+<p>Feb</p>
+</div>
+</div>
+
+<div class="event-content">
+<h3>Leadership Seminar</h3>
+
+<div class="event-meta">
+<span><i class="fa-regular fa-clock"></i> 9:30 AM</span>
+<span><i class="fa-solid fa-location-dot"></i> Main Hall</span>
+</div>
+
+<p>Leadership seminar organized with international partners.</p>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+
+    <footer>
+        <div class="footer-logo-center">
+            <img src="LoGo.png" alt="MUST Logo" class="footer-brand-logo">
+        </div>
+
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">The University</a></li>
+                    <li><a href="#">Academics</a></li>
+                    <li><a href="#">Life At MUST</a></li>
+                    <li><a href="#">Research & Centres</a></li>
+                    <li><a href="#">Maps & Directions</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>About University</h4>
+                <ul>
+                    <li><a href="#">About MUST</a></li>
+                    <li><a href="#">History</a></li>
+                    <li><a href="#">Accreditation And Partnership</a></li>
+                    <li><a href="#">Why MUST</a></li>
+                    <li><a href="#">Values & Principles</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>MUST BUZZ</h4>
+                <ul>
+                    <li><a href="#events">MUST Events</a></li>
+                    <li><a href="#news">MUST News</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Announcement</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <p>16878</p>
+                <p>Info@Must.Edu.Eg</p>
+                <p>Al Motamayez District – 6th of October, Egypt</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            Copyright All Right Reserved @ MUST UNIVERSITY 2026
+        </div>
+    </footer>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+      
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>
