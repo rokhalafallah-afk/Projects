@@ -27,10 +27,10 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["django-main-a7ec857.kuberns.clou ", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["https://projects-main-d9550e3.kuberns.cloud", "localhost", "127.0.0.1"]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://django-main-a7ec857.kuberns.cloud",
+    "https://django-main-a7ec857.kuberns.cloud", "https://projects-main-d9550e3.kuberns.cloud"
 ]
 
 
