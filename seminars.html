@@ -1,20 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
 
+{% block title %}MUST - Seminars{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Explore sports activities at MUST! Book fields, join teams, and stay active with university sports programs.">
-    <title>MUST Student Activities Hub - Sports</title>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-
+{% block extra_css %}
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
@@ -499,98 +488,10 @@
             }
         }
     </style>
-</head>
+{% endblock %}
 
-<body>
-
- 
-
-   <header>
-        <nav>
-            <a href="index.html" class="logo">
-                <img src="img/LoGo.png" alt="MUST Logo" class="Uni-logo">
-            </a>
-
-            <ul class="nav-links">
-                
-                <li class="dropdown">
-                    <a href="#">The University <i class="fa-solid fa-angle-down"></i></a>
-                    <ul class="custom-dropdown-menu">
-                        <li><a href="#">About MUST <i class="fa-solid fa-angle-right" style="font-size: 0.7rem;"></i></a></li>
-                        <li><a href="#">Sectors <i class="fa-solid fa-angle-right" style="font-size: 0.7rem;"></i></a></li>
-                        <li><a href="#">Reports <i class="fa-solid fa-angle-right" style="font-size: 0.7rem;"></i></a></li>
-                        <li><a href="#">Policies</a></li>
-                        <li><a href="#">University Council Minutes</a></li>
-                        <li><a href="#">Quality Assurance and Accreditation Sector</a></li>
-                        <li><a href="#">Accreditation & Partnerships</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Resources <i class="fa-solid fa-angle-right" style="font-size: 0.7rem;"></i></a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#">Academics <i class="fa-solid fa-angle-down"></i></a>
-                    <ul class="custom-dropdown-menu">
-                        <li><a href="#">Undergraduate Studies</a></li>
-                        <li><a href="#">Post-Graduate Program</a></li>
-                        <li><a href="#">Academic Calendar</a></li>
-                        <li><a href="#">International Students Affairs Sector</a></li>
-                    </ul>
-                </li>
-<li class="dropdown"><a href="index.html">Admission</a></li>
-                <li class="dropdown">
-                    <a href="#">MUST BUZZ <i class="fa-solid fa-angle-down"></i></a>
-                    <ul class="custom-dropdown-menu">
-                        <li><a href="#events">MUST Events</a></li>
-                        <li><a href="#news">MUST News</a></li>
-                        <li><a href="#">MUST Blogs</a></li>
-                        <li><a href="#">Announcements</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#">Centers <i class="fa-solid fa-angle-down"></i></a>
-                    <ul class="custom-dropdown-menu">
-                        <li><a href="#">Centers</a></li>
-                        <li><a href="#">Units</a></li>
-                        <li><a href="#">Research Center for Public Opinion</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#">Life At MUST <i class="fa-solid fa-angle-down"></i></a>
-                    <ul class="custom-dropdown-menu">
-                        <li><a href="#">MUST Life</a></li>
-                        <li><a href="#">MUST Stars</a></li>
-                        <li><a href="#">MUST Clubs</a></li>
-                        <li><a href="#">Facilities</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown"><a href="index.html">SGDs</a></li>
-            </ul>
-
-            <div class="nav-icons">
-              <a href="index.html" style="color: white;">
-    <i class="fa-solid fa-bars" title="Menu"></i>
-</a>
-                <span class="separator">|</span>
-                <span style="font-family: Arial, sans-serif; font-weight: bold; font-size: 1.1rem;" title="English">EN</span>
-                <span class="separator">|</span>
-                <a href="#login" class="btn-login">Login</a>
-            </div>
-        </nav>
-    </header>
-
-    <div class="social-fixed">
-        <a href="#" class="active"><i class="fa-solid fa-magnifying-glass"></i></a>
-        <a href="https://www.linkedin.com/school/misr-university-for-science-and-technology/"><i
-                class="fa-brands fa-linkedin-in"></i></a>
-        <a href="https://www.facebook.com/mustuni"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/mustuni"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://x.com/must_university"><i class="fa-brands fa-x-twitter"></i></a>
-    </div>
-
-  <section id="event" class="must-events">
+{% block content %}
+<section id="event" class="must-events">
 
 <div class="section-header">
 <h2>Seminars</h2>
@@ -601,7 +502,7 @@
 
 <div class="must-event-card">
 <div class="event-img">
-<img src="event1.png">
+<img src="{% static 'img/event1.png' %}">
 <div class="event-date">
 <span>03</span>
 <p>Nov</p>
@@ -624,7 +525,7 @@
 
 <div class="must-event-card">
 <div class="event-img">
-<img src="event2.png">
+<img src="{% static 'img/event2.png' %}">
 <div class="event-date">
 <span>06</span>
 <p>Nov</p>
@@ -647,7 +548,7 @@
 
 <div class="must-event-card">
 <div class="event-img">
-<img src="event3.png">
+<img src="{% static 'img/event3.png' %}">
 <div class="event-date">
 <span>09</span>
 <p>Dec</p>
@@ -670,7 +571,7 @@
 
 <div class="must-event-card">
 <div class="event-img">
-<img src="event4.jpeg">
+<img src="{% static 'img/event4.jpeg' %}">
 <div class="event-date">
 <span>04</span>
 <p>Feb</p>
@@ -692,7 +593,7 @@
 
 <div class="must-event-card">
 <div class="event-img">
-<img src="event1.png">
+<img src="{% static 'img/event1.png' %}">
 <div class="event-date">
 <span>03</span>
 <p>Nov</p>
@@ -715,7 +616,7 @@
 
 <div class="must-event-card">
 <div class="event-img">
-<img src="event2.png">
+<img src="{% static 'img/event2.png' %}">
 <div class="event-date">
 <span>06</span>
 <p>Nov</p>
@@ -738,7 +639,7 @@
 
 <div class="must-event-card">
 <div class="event-img">
-<img src="event3.png">
+<img src="{% static 'img/event3.png' %}">
 <div class="event-date">
 <span>09</span>
 <p>Dec</p>
@@ -761,7 +662,7 @@
 
 <div class="must-event-card">
 <div class="event-img">
-<img src="event4.jpeg">
+<img src="{% static 'img/event4.jpeg' %}">
 <div class="event-date">
 <span>04</span>
 <p>Feb</p>
@@ -786,58 +687,4 @@
 
 
 </section>
-
-    <footer>
-        <div class="footer-logo-center">
-            <img src="img/LoGo.png" alt="MUST Logo" class="footer-brand-logo">
-        </div>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>Links</h4>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">The University</a></li>
-                    <li><a href="#">Academics</a></li>
-                    <li><a href="#">Life At MUST</a></li>
-                    <li><a href="#">Research & Centres</a></li>
-                    <li><a href="#">Maps & Directions</a></li>
-                    <li><a href="#">FAQs</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>About University</h4>
-                <ul>
-                    <li><a href="#">About MUST</a></li>
-                    <li><a href="#">History</a></li>
-                    <li><a href="#">Accreditation And Partnership</a></li>
-                    <li><a href="#">Why MUST</a></li>
-                    <li><a href="#">Values & Principles</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>MUST BUZZ</h4>
-                <ul>
-                    <li><a href="#events">MUST Events</a></li>
-                    <li><a href="#news">MUST News</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Announcement</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contact Info</h4>
-                <p>16878</p>
-                <p>Info@Must.Edu.Eg</p>
-                <p>Al Motamayez District – 6th of October, Egypt</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            Copyright All Right Reserved @ MUST UNIVERSITY 2026
-        </div>
-    </footer>
-
-    <script src="js/script.js"></script>
-</body>
-
-</html>
+{% endblock %}

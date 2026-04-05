@@ -1,30 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
 
+{% block title %}MUST - Service Portal{% endblock %}
 
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Explore sports activities at MUST! Book fields, join teams, and stay active with university sports programs.">
-    <title>MUST Student Activities Hub - Sports</title>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-
+{% block extra_css %}
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
         :root {
             /* MUST Official Colors */
             --primary: rgb(28, 48, 110);
-            /* MUST Blue */
             --secondary: rgb(0, 172, 92);
-            /* MUST Green */
             --primary-light: rgba(28, 48, 110, 0.1);
             --secondary-light: rgba(0, 172, 92, 0.1);
             --secondary-hover: rgb(0, 145, 75);
@@ -36,6 +22,16 @@
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --transition: all 0.3s ease;
+
+            /* Aliases used by travel cards section */
+            --must-blue: rgb(28, 48, 110);
+            --must-green: rgb(0, 172, 92);
+            --must-green-hover: rgb(0, 145, 75);
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
         * {
@@ -738,97 +734,9 @@
             }
         }
     </style>
-</head>
+{% endblock %}
 
-<body>
-
- 
-
-   <header>
-        <nav>
-            <a href="index.html" class="logo">
-                <img src="img/LoGo.png" alt="MUST Logo" class="Uni-logo">
-            </a>
-
-            <ul class="nav-links">
-                
-                <li class="dropdown">
-                    <a href="#">The University <i class="fa-solid fa-angle-down"></i></a>
-                    <ul class="custom-dropdown-menu">
-                        <li><a href="#">About MUST <i class="fa-solid fa-angle-right" style="font-size: 0.7rem;"></i></a></li>
-                        <li><a href="#">Sectors <i class="fa-solid fa-angle-right" style="font-size: 0.7rem;"></i></a></li>
-                        <li><a href="#">Reports <i class="fa-solid fa-angle-right" style="font-size: 0.7rem;"></i></a></li>
-                        <li><a href="#">Policies</a></li>
-                        <li><a href="#">University Council Minutes</a></li>
-                        <li><a href="#">Quality Assurance and Accreditation Sector</a></li>
-                        <li><a href="#">Accreditation & Partnerships</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Resources <i class="fa-solid fa-angle-right" style="font-size: 0.7rem;"></i></a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#">Academics <i class="fa-solid fa-angle-down"></i></a>
-                    <ul class="custom-dropdown-menu">
-                        <li><a href="#">Undergraduate Studies</a></li>
-                        <li><a href="#">Post-Graduate Program</a></li>
-                        <li><a href="#">Academic Calendar</a></li>
-                        <li><a href="#">International Students Affairs Sector</a></li>
-                    </ul>
-                </li>
-<li class="dropdown"><a href="index.html">Admission</a></li>
-                <li class="dropdown">
-                    <a href="#">MUST BUZZ <i class="fa-solid fa-angle-down"></i></a>
-                    <ul class="custom-dropdown-menu">
-                        <li><a href="#events">MUST Events</a></li>
-                        <li><a href="#news">MUST News</a></li>
-                        <li><a href="#">MUST Blogs</a></li>
-                        <li><a href="#">Announcements</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#">Centers <i class="fa-solid fa-angle-down"></i></a>
-                    <ul class="custom-dropdown-menu">
-                        <li><a href="#">Centers</a></li>
-                        <li><a href="#">Units</a></li>
-                        <li><a href="#">Research Center for Public Opinion</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#">Life At MUST <i class="fa-solid fa-angle-down"></i></a>
-                    <ul class="custom-dropdown-menu">
-                        <li><a href="#">MUST Life</a></li>
-                        <li><a href="#">MUST Stars</a></li>
-                        <li><a href="#">MUST Clubs</a></li>
-                        <li><a href="#">Facilities</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown"><a href="index.html">SGDs</a></li>
-            </ul>
-
-            <div class="nav-icons">
-              <a href="index.html" style="color: white;">
-    <i class="fa-solid fa-bars" title="Menu"></i>
-</a>
-                <span class="separator">|</span>
-                <span style="font-family: Arial, sans-serif; font-weight: bold; font-size: 1.1rem;" title="English">EN</span>
-                <span class="separator">|</span>
-                <a href="#login" class="btn-login">Login</a>
-            </div>
-        </nav>
-    </header>
-
-    <div class="social-fixed">
-        <a href="#" class="active"><i class="fa-solid fa-magnifying-glass"></i></a>
-        <a href="https://www.linkedin.com/school/misr-university-for-science-and-technology/"><i
-                class="fa-brands fa-linkedin-in"></i></a>
-        <a href="https://www.facebook.com/mustuni"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/mustuni"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://x.com/must_university"><i class="fa-brands fa-x-twitter"></i></a>
-    </div>
-
+{% block content %}
     <main>
         <section class="section-wrapper">
             <div class="section-header-modern">
@@ -906,7 +814,7 @@
         <div class="clubs-grid">
 
             <div class="club-card">
-                <img src="inf proj/img/efc37c52370be41bfc2131f8ccf3b300.jpg" alt="GDG Club" class="club-img">
+                <img src="{% static 'inf proj/img/efc37c52370be41bfc2131f8ccf3b300.jpg' %}" alt="GDG Club" class="club-img">
                 <h3>GDG</h3>
                 <p>GDG is the Google Developer Student Club at MUST. Members learn Google technologies, build web and
                     mobile applications, and collaborate on real-world projects. The club hosts workshops, hackathons,
@@ -916,12 +824,12 @@
                     <span>01012345678</span>
                 </div>
                 <button class="join-btn">
-                    <a href="../Sports/Register Team.html">Registration</a>
+                    <a href="{% url 'form-club' %}">Registration</a>
                 </button>
             </div>
 
             <div class="club-card">
-                <img src="inf proj/img/161c339b45e5a463d06d5e82d2b3c727.jpg" alt="IEEE Club" class="club-img">
+                <img src="{% static 'inf proj/img/161c339b45e5a463d06d5e82d2b3c727.jpg' %}" alt="IEEE Club" class="club-img">
                 <h3>IEEE</h3>
                 <p>IEEE is the global engineering and technology club at MUST. It supports members through seminars,
                     robotics projects, and research events. The club encourages innovation in electronics,
@@ -931,12 +839,12 @@
                     <span>01012345678</span>
                 </div>
                 <button class="join-btn">
-                    <a href="../Sports/Register Team.html">Registration</a>
+                    <a href="{% url 'form-club' %}">Registration</a>
                 </button>
             </div>
 
             <div class="club-card">
-                <img src="inf proj/img/ce3b7fd7ed467b1ae0ea8f8634264750.jpg" alt="CPC Club" class="club-img">
+                <img src="{% static 'inf proj/img/ce3b7fd7ed467b1ae0ea8f8634264750.jpg' %}" alt="CPC Club" class="club-img">
                 <h3>CPC</h3>
                 <p>CPC is the Competitive Programming Club at MUST. It brings together students who love coding,
                     problem-solving, and software development. The club organizes programming contests, collaborative
@@ -946,12 +854,12 @@
                     <span>01012345678</span>
                 </div>
                 <button class="join-btn">
-                    <a href="../Sports/Register Team.html">Registration</a>
+                    <a href="{% url 'form-club' %}">Registration</a>
                 </button>
             </div>
 
             <div class="club-card">
-                <img src="inf proj/img/image.png" alt="Cyber MUST Club" class="club-img">
+                <img src="{% static 'inf proj/img/image.png' %}" alt="Cyber MUST Club" class="club-img">
                 <h3>Cyber MUST</h3>
                 <p>Cyber MUST is the student cybersecurity club at MUST. It focuses on ethical hacking, digital defense,
                     and cybersecurity research. Members train in CTF challenges, threat analysis, and security labs to
@@ -961,12 +869,12 @@
                     <span>01012345678</span>
                 </div>
                 <button class="join-btn">
-                    <a href="../Sports/Register Team.html">Registration</a>
+                    <a href="{% url 'form-club' %}">Registration</a>
                 </button>
             </div>
 
             <div class="club-card">
-                <img src="inf proj/img/7b83481a4cf0c574be1e71dd0294121e.jpg" alt="Music Club" class="club-img">
+                <img src="{% static 'inf proj/img/7b83481a4cf0c574be1e71dd0294121e.jpg' %}" alt="Music Club" class="club-img">
                 <h3>Music Club</h3>
                 <p>The Music Club is a place for students who love music and creativity. Members can sing, play
                     instruments, and learn about different types of music. We practice together, share talents, and
@@ -976,12 +884,12 @@
                     <span>01012345678</span>
                 </div>
                 <button class="join-btn">
-                    <a href="../Sports/Register Team.html">Registration</a>
+                    <a href="{% url 'form-club' %}">Registration</a>
                 </button>
             </div>
 
             <div class="club-card">
-                <img src="inf proj/img/652ace1cd16de53a5c067c0d51cb1e97.jpg" alt="Art Club" class="club-img">
+                <img src="{% static 'inf proj/img/652ace1cd16de53a5c067c0d51cb1e97.jpg' %}" alt="Art Club" class="club-img">
                 <h3>Art Club</h3>
                 <p>The Art Club is a creative space for students who love drawing, painting, and expressing ideas
                     through art. Members explore different styles using colors, pencils, and digital tools. We work on
@@ -991,12 +899,12 @@
                     <span>01012345678</span>
                 </div>
                 <button class="join-btn">
-                    <a href="../Sports/Register Team.html">Registration</a>
+                    <a href="{% url 'form-club' %}">Registration</a>
                 </button>
             </div>
 
             <div class="club-card">
-                <img src="inf proj/img/image.png" alt="Huawei AI Club" class="club-img">
+                <img src="{% static 'inf proj/img/image.png' %}" alt="Huawei AI Club" class="club-img">
                 <h3>Huawei AI Club</h3>
                 <p>The MUST AI Club is a certified training center qualifying students in Artificial Intelligence and
                     Deep Learning using Huawei tools like ModelArts. Activities include HCIA-AI prep camps, practical
@@ -1006,12 +914,12 @@
                     <span>01012345678</span>
                 </div>
                 <button class="join-btn">
-                    <a href="../Sports/Register Team.html">Registration</a>
+                    <a href="{% url 'form-club' %}">Registration</a>
                 </button>
             </div>
 
             <div class="club-card">
-                <img src="inf proj/img/image.png" alt="Huawei Academy - MUST" class="club-img">
+                <img src="{% static 'inf proj/img/image.png' %}" alt="Huawei Academy - MUST" class="club-img">
                 <h3>Huawei Academy</h3>
                 <p>Huawei Academy at MUST provides certified training connecting university studies with the job market
                     in Cloud, AI, Security, and Datacom. Activities include certified courses, summer internships, job
@@ -1021,66 +929,11 @@
                     <span>01012345678</span>
                 </div>
                 <button class="join-btn">
-                    <a href="../Sports/Register Team.html">Registration</a>
+                    <a href="{% url 'form-club' %}">Registration</a>
                 </button>
             </div>
 
         </div>
     </section>
     </main>
-
-
-    <footer>
-        <div class="footer-logo-center">
-            <img src="img/LoGo.png" alt="MUST Logo" class="footer-brand-logo">
-        </div>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>Links</h4>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">The University</a></li>
-                    <li><a href="#">Academics</a></li>
-                    <li><a href="#">Life At MUST</a></li>
-                    <li><a href="#">Research & Centres</a></li>
-                    <li><a href="#">Maps & Directions</a></li>
-                    <li><a href="#">FAQs</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>About University</h4>
-                <ul>
-                    <li><a href="#">About MUST</a></li>
-                    <li><a href="#">History</a></li>
-                    <li><a href="#">Accreditation And Partnership</a></li>
-                    <li><a href="#">Why MUST</a></li>
-                    <li><a href="#">Values & Principles</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>MUST BUZZ</h4>
-                <ul>
-                    <li><a href="#events">MUST Events</a></li>
-                    <li><a href="#news">MUST News</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Announcement</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contact Info</h4>
-                <p>16878</p>
-                <p>Info@Must.Edu.Eg</p>
-                <p>Al Motamayez District – 6th of October, Egypt</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            Copyright All Right Reserved @ MUST UNIVERSITY 2026
-        </div>
-    </footer>
-
-    <script src="js/script.js"></script>
-</body>
-
-</html>
+{% endblock %}

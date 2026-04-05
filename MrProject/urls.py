@@ -16,11 +16,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from dashboard.views import home
+from dashboard import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),
-    path('api/', include('dashboard.urls')),  # هنا نربط الـ app بالproject urls
+    path('api/', include('dashboard.urls')),
+
+    # Page routes
+    path('', views.home, name='index'),
+    path('achiv-news/', views.achiv_news, name='achiv-news'),
+    path('conferences/', views.conferences, name='conferences'),
+    path('seminars/', views.seminars, name='seminars'),
+    path('month/', views.month, name='month'),
+    path('week-events/', views.week_events, name='week-events'),
+    path('workshops/', views.workshops, name='workshops'),
+    path('student-news/', views.student_news, name='student-news'),
+    path('top-news/', views.top_news, name='top-news'),
+    path('service-portal/', views.service_portal, name='service-portal'),
+    path('form-club/', views.form_club, name='form-club'),
 ]
 
 
