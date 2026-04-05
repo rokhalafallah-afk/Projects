@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+<<<<<<< HEAD
 from dashboard import views
 
 urlpatterns = [
@@ -34,6 +35,13 @@ urlpatterns = [
     path('top-news/', views.top_news, name='top-news'),
     path('service-portal/', views.service_portal, name='service-portal'),
     path('form-club/', views.form_club, name='form-club'),
+=======
+from dashboard.views import home
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', home),
+    path('api/', include('dashboard.urls')),  # هنا نربط الـ app بالproject urls
+>>>>>>> 3bb2af9d2b9fd6069068d29d584b95000576f7b2
 ]
 
 

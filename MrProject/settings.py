@@ -22,7 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY", "fallback-secret")
+<<<<<<< HEAD
 DEBUG = os.environ.get("DEBUG", "True") == "True"
+=======
+DEBUG = os.environ.get("DEBUG", "False") == "True"
+>>>>>>> 3bb2af9d2b9fd6069068d29d584b95000576f7b2
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True # Removed hardcoded DEBUG=True
@@ -49,8 +53,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'rest_framework',
     'dashboard',
+=======
+    'dashboard'
+>>>>>>> 3bb2af9d2b9fd6069068d29d584b95000576f7b2
 ]
 
 MIDDLEWARE = [
@@ -69,7 +77,11 @@ ROOT_URLCONF = 'MrProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [BASE_DIR],
+=======
+        'DIRS': [],
+>>>>>>> 3bb2af9d2b9fd6069068d29d584b95000576f7b2
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,12 +145,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+<<<<<<< HEAD
 STATICFILES_DIRS = [BASE_DIR]
 STATICFILES_STORAGE = (
     "django.contrib.staticfiles.storage.StaticFilesStorage"
     if DEBUG else
     "whitenoise.storage.CompressedManifestStaticFilesStorage"
 )
+=======
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+>>>>>>> 3bb2af9d2b9fd6069068d29d584b95000576f7b2
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

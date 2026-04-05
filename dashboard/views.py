@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from rest_framework import viewsets
@@ -49,6 +50,22 @@ def form_club(request):
     matches = Match.objects.filter(status='upcoming').order_by('match_date')
     return render(request, 'form club.html', {'matches': matches})
 
+=======
+from django.shortcuts import render
+from django.http import HttpResponse
+from rest_framework import viewsets
+from .models import News, Event, Match, User
+from .serializers import NewsSerializer, UserSerializer, EventSerializer, SportSerializer
+from .models import User, Event , News, Match
+from .serializers import UserSerializer
+from django.shortcuts import redirect
+# Create your views here.
+
+# dashboard/views.py
+
+def home(request):
+    return redirect("/admin/login/")
+>>>>>>> 3bb2af9d2b9fd6069068d29d584b95000576f7b2
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -63,8 +80,12 @@ class EventViewSet(viewsets.ModelViewSet):
     
 class SportViewSet(viewsets.ModelViewSet):
     queryset = Match.objects.all()
+<<<<<<< HEAD
     serializer_class = SportSerializer
 
 class RegistrationViewSet(viewsets.ModelViewSet):
     queryset = Registration.objects.all()
     serializer_class = RegistrationSerializer
+=======
+    serializer_class = SportSerializer
+>>>>>>> 3bb2af9d2b9fd6069068d29d584b95000576f7b2
