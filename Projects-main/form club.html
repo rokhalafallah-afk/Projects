@@ -1,0 +1,491 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MUST - Academies Registration{% endblock %}
+
+{% block extra_css %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        :root {
+            /* MUST Official Colors */
+            --primary: rgb(28, 48, 110);   /* MUST Blue */
+            --secondary: rgb(0, 172, 92);  /* MUST Green */
+            --primary-light: rgba(28, 48, 110, 0.1);
+            --secondary-light: rgba(0, 172, 92, 0.1);
+            --secondary-hover: rgb(0, 145, 75);
+            
+            --bg-light: #F8FAFC;
+            --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-gray: #64748B;
+            --border-color: #E2E8F0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Inter', sans-serif; 
+        }
+
+        body { 
+            background-color: var(--bg-light); 
+            color: var(--text-dark); 
+            line-height: 1.6; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+         /* ------------------ ANNOUNCEMENT TICKER ------------------ */
+        .announcement-bar {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 0.4rem 0;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .marquee {
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+            padding-left: 100%;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+         /* ------------------ NAVBAR ------------------ */
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .Uni-logo {
+            height: 100px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            list-style: none;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        /* --- DROPDOWN CSS INTEGRATED HERE --- */
+        .dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100px; /* Match navbar height to avoid hover glitches */
+        }
+
+        .dropdown > a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown > a:hover, .dropdown > a.active {
+            color: var(--secondary);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 80px; /* Drop down right below the nav text */
+            left: 0;
+            background-color: var(--primary);
+            min-width: 250px;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            list-style: none;
+            padding: 0.5rem 0;
+            z-index: 1001;
+            border-radius: 0 0 8px 8px;
+            margin: 0;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            position: relative;
+        }
+
+        .dropdown-menu a {
+            color: var(--white) !important;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--secondary) !important;
+        }
+
+        /* --- ICONS & LOGIN BUTTON --- */
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .nav-icons i,
+        .nav-icons span {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-icons i:hover,
+        .nav-icons span:hover {
+            color: var(--secondary);
+        }
+
+        .separator {
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 300;
+        }
+
+        .btn-login {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--secondary);
+            padding: 0.4rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-login:hover {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+
+        /* ------------------ BUTTONS ------------------ */
+        .btn {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 172, 92, 0.3);
+        }
+        /* ------------------ SOCIAL SIDEBAR (RIGHT ALIGNED) ------------------ */
+        .social-fixed {
+            position: fixed;
+            right: 15px;
+            /* Moves the sidebar to the right edge */
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            /* Perfect spacing between the circles */
+            z-index: 999;
+        }
+
+        .social-fixed a {
+            color: var(--primary);
+            /* Dark blue icons */
+            background: var(--white);
+            /* White circle background */
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            /* Makes them perfectly circular */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            /* Slightly larger icons */
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            /* Soft drop shadow */
+            transition: var(--transition);
+        }
+
+        .social-fixed a:hover {
+            transform: scale(1.1);
+            /* Slight pop effect on hover */
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Green styling specifically for the search icon (active state) */
+        .social-fixed a.active {
+            background-color: var(--secondary);
+            /* Green background */
+            color: var(--white);
+            /* White icon */
+        }
+
+        /* Make sure mobile views hide the sidebar properly */
+        @media (max-width: 768px) {
+            .social-fixed {
+                display: none;
+            }
+        }
+
+        /* ------------------ ACADEMY REGISTRATION FORM ------------------ */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 2rem;
+        }
+
+        .form-wrapper {
+            background: var(--white);
+            width: 100%;
+            max-width: 600px;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-header h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--white);
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px var(--secondary-light);
+        }
+
+        /* Specific styling for the select dropdown */
+        select.form-control {
+            cursor: pointer;
+            appearance: none; /* Removes default arrow */
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%231C306E%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem top 50%;
+            background-size: 0.65rem auto;
+            padding-right: 2.5rem;
+        }
+
+        select.form-control optgroup {
+            font-weight: 700;
+            color: var(--primary);
+            background-color: var(--bg-light);
+        }
+
+        select.form-control option {
+            font-weight: 400;
+            color: var(--text-dark);
+            background-color: var(--white);
+            padding: 10px;
+        }
+
+        .btn-submit {
+            background-color: var(--secondary);
+            color: var(--white);
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 172, 92, 0.3);
+        }
+
+        /* ------------------ FOOTER ------------------ */
+        footer { background-color: var(--primary); color: var(--white); padding-top: 4rem; margin-top: auto; }
+        .footer-logo-center { text-align: center; margin-bottom: 4rem; }
+        .footer-brand-logo { height: 120px; width: auto; margin: 0 auto; display: block; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; padding: 0 2rem 4rem 2rem; }
+        .footer-col h4 { color: var(--secondary); font-size: 1.1rem; margin-bottom: 1.5rem; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 0.8rem; }
+        .footer-col ul li a { color: var(--white); text-decoration: none; font-size: 0.9rem; transition: var(--transition); }
+        .footer-col ul li a:hover { color: var(--secondary); }
+        .footer-col p { color: var(--white); font-size: 0.9rem; font-weight: 700; margin-bottom: 1rem; }
+        .footer-bottom { background-color: var(--white); color: var(--primary); text-align: center; padding: 1.2rem; font-size: 0.85rem; font-weight: 600; }
+
+        /* Responsive Layouts */
+        @media (max-width: 1024px) {
+            .nav-links { display: none; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .social-fixed { display: none; }
+            .form-wrapper { padding: 2rem 1.5rem; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <main class="main-content">
+        <div class="form-wrapper">
+            <div class="form-header">
+                <h2>Academy Enrollment</h2>
+                <p>Register for specialized courses across our technology academies to enhance your professional skills.</p>
+            </div>
+
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="studentName">Full Name</label>
+                    <input type="text" id="studentName" name="studentName" class="form-control" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentID">University ID</label>
+                    <input type="text" id="studentID" name="studentID" class="form-control" placeholder="Enter your University ID" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="courseSelection">Select Academy & Course</label>
+                    <select id="courseSelection" name="courseSelection" class="form-control" required>
+                        <option value="" disabled selected>Choose your desired course...</option>
+                        
+                        <optgroup label="Huawei Academy">
+                            <option value="huawei-ai">AI (Artificial Intelligence)</option>
+                            <option value="huawei-datacom">Datacom (Computer Networks)</option>
+                            <option value="huawei-cloud">Cloud Computing</option>
+                            <option value="huawei-5g">5G Networks</option>
+                            <option value="huawei-bigdata">Big Data</option>
+                            <option value="huawei-cybersecurity">Cyber Security</option>
+                        </optgroup>
+
+                        <optgroup label="Cisco Academy">
+                            <option value="cisco-net1">Computer Networks I</option>
+                            <option value="cisco-net2">Computer Networks II</option>
+                            <option value="cisco-iot">Internet of Things (IoT)</option>
+                            <option value="cisco-security">Security</option>
+                        </optgroup>
+
+                        <optgroup label="Red Hat Academy">
+                            <option value="redhat-os">Operating Systems</option>
+                            <option value="redhat-admin">Administration</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">Submit Application</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}

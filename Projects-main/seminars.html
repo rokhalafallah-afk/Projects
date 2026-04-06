@@ -1,0 +1,690 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MUST - Seminars{% endblock %}
+
+{% block extra_css %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        :root {
+            /* MUST Official Colors */
+            --primary: rgb(28, 48, 110);
+            /* MUST Blue */
+            --secondary: rgb(0, 172, 92);
+            /* MUST Green */
+            --primary-light: rgba(28, 48, 110, 0.1);
+            --secondary-light: rgba(0, 172, 92, 0.1);
+            --secondary-hover: rgb(0, 145, 75);
+
+            --bg-light: #F8FAFC;
+            --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-gray: #64748B;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ------------------ ANNOUNCEMENT TICKER ------------------ */
+        .announcement-bar {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 0.4rem 0;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .marquee {
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+            padding-left: 100%;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+         /* ------------------ NAVBAR ------------------ */
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .Uni-logo {
+            height: 100px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            list-style: none;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        /* --- DROPDOWN CSS INTEGRATED HERE --- */
+        .dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100px; /* Match navbar height to avoid hover glitches */
+        }
+
+        .dropdown > a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown > a:hover, .dropdown > a.active {
+            color: var(--secondary);
+        }
+
+        .custom-dropdown-menu {
+            position: absolute;
+            top: 80px; /* Drop down right below the nav text */
+            left: 0;
+            background-color: var(--primary);
+            min-width: 250px;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            list-style: none;
+            padding: 0.5rem 0;
+            z-index: 1001;
+            border-radius: 0 0 8px 8px;
+            margin: 0;
+        }
+
+        .dropdown:hover .custom-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .custom-dropdown-menu li {
+            position: relative;
+        }
+
+        .custom-dropdown-menu a {
+            color: var(--white) !important;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .custom-dropdown-menu a:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--secondary) !important;
+        }
+
+        /* --- ICONS & LOGIN BUTTON --- */
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .nav-icons i,
+        .nav-icons span {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-icons i:hover,
+        .nav-icons span:hover {
+            color: var(--secondary);
+        }
+
+        .separator {
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 300;
+        }
+
+        .btn-login {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--secondary);
+            padding: 0.4rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-login:hover {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+
+        /* ------------------ BUTTONS ------------------ */
+        .btn {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 172, 92, 0.3);
+        }
+        /* ------------------ SOCIAL SIDEBAR ------------------ */
+        .social-fixed {
+            position: fixed;
+            right: 15px;
+            /* Moves the sidebar to the right edge */
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            /* Perfect spacing between the circles */
+            z-index: 999;
+        }
+
+        .social-fixed a {
+            color: var(--primary);
+            /* Dark blue icons */
+            background: var(--white);
+            /* White circle background */
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            /* Makes them perfectly circular */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            /* Slightly larger icons */
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            /* Soft drop shadow */
+            transition: var(--transition);
+        }
+
+        .social-fixed a:hover {
+            transform: scale(1.1);
+            /* Slight pop effect on hover */
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Green styling specifically for the search icon (active state) */
+        .social-fixed a.active {
+            background-color: var(--secondary);
+            /* Green background */
+            color: var(--white);
+            /* White icon */
+        }
+
+        /* Make sure mobile views hide the sidebar properly */
+        @media (max-width: 768px) {
+            .social-fixed {
+                display: none;
+            }
+        }
+
+        /* ------------------ SPORTS GRID SECTION ------------------ */
+        .sports-section {
+            flex-grow: 1;
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .sport-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid #E2E8F0;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .sport-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary-light);
+        }
+
+        .sport-img {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .sport-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .sport-content h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .sport-content p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            /* Pushes the button to the bottom */
+        }
+
+        .btn-register {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: var(--transition);
+            display: block;
+            width: 100%;
+        }
+
+        .btn-register:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 172, 92, 0.3);
+            color: var(--white);
+        }
+
+        /* ------------------ FOOTER ------------------ */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding-top: 4rem;
+            margin-top: auto;
+        }
+
+        .footer-logo-center {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand-logo {
+            height: 120px;
+            width: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 0 2rem 4rem 2rem;
+        }
+
+        .footer-col h4 {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-col p {
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-bottom {
+            background-color: var(--white);
+            color: var(--primary);
+            text-align: center;
+            padding: 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* ------------------ RESPONSIVE ------------------ */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .social-fixed {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .sports-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<section id="event" class="must-events">
+
+<div class="section-header">
+<h2>Seminars</h2>
+
+</div>
+
+<div class="must-events-container">
+
+<div class="must-event-card">
+<div class="event-img">
+<img src="{% static 'img/event1.png' %}">
+<div class="event-date">
+<span>03</span>
+<p>Nov</p>
+</div>
+</div>
+
+<div class="event-content">
+<h3>The College of Nursing announces the upcoming workshop.</h3>
+
+<div class="event-meta">
+<span><i class="fa-regular fa-clock"></i> 11:00 AM</span>
+<span><i class="fa-solid fa-location-dot"></i> Nursing Hall</span>
+</div>
+
+<p>The College of Nursing announces the upcoming workshop.</p>
+
+</div>
+</div>
+
+
+<div class="must-event-card">
+<div class="event-img">
+<img src="{% static 'img/event2.png' %}">
+<div class="event-date">
+<span>06</span>
+<p>Nov</p>
+</div>
+</div>
+
+<div class="event-content">
+<h3>IT Conference</h3>
+
+<div class="event-meta">
+<span><i class="fa-regular fa-clock"></i> 5:00 PM</span>
+<span><i class="fa-solid fa-location-dot"></i> IT Building</span>
+</div>
+
+<p>Conference organized by the Faculty of Information Technology.</p>
+
+</div>
+</div>
+
+
+<div class="must-event-card">
+<div class="event-img">
+<img src="{% static 'img/event3.png' %}">
+<div class="event-date">
+<span>09</span>
+<p>Dec</p>
+</div>
+</div>
+
+<div class="event-content">
+<h3>Annual Scientific Day</h3>
+
+<div class="event-meta">
+<span><i class="fa-regular fa-clock"></i> 10:00 AM</span>
+<span><i class="fa-solid fa-location-dot"></i> BioTech Hall</span>
+</div>
+
+<p>Annual scientific day of the College of Biotechnology.</p>
+
+</div>
+</div>
+
+
+<div class="must-event-card">
+<div class="event-img">
+<img src="{% static 'img/event4.jpeg' %}">
+<div class="event-date">
+<span>04</span>
+<p>Feb</p>
+</div>
+</div>
+
+<div class="event-content">
+<h3>Leadership Seminar</h3>
+
+<div class="event-meta">
+<span><i class="fa-regular fa-clock"></i> 9:30 AM</span>
+<span><i class="fa-solid fa-location-dot"></i> Main Hall</span>
+</div>
+
+<p>Leadership seminar organized with international partners.</p>
+
+</div>
+</div>
+
+<div class="must-event-card">
+<div class="event-img">
+<img src="{% static 'img/event1.png' %}">
+<div class="event-date">
+<span>03</span>
+<p>Nov</p>
+</div>
+</div>
+
+<div class="event-content">
+<h3>The College of Nursing announces the upcoming workshop.</h3>
+
+<div class="event-meta">
+<span><i class="fa-regular fa-clock"></i> 11:00 AM</span>
+<span><i class="fa-solid fa-location-dot"></i> Nursing Hall</span>
+</div>
+
+<p>The College of Nursing announces the upcoming workshop.</p>
+
+</div>
+</div>
+
+
+<div class="must-event-card">
+<div class="event-img">
+<img src="{% static 'img/event2.png' %}">
+<div class="event-date">
+<span>06</span>
+<p>Nov</p>
+</div>
+</div>
+
+<div class="event-content">
+<h3>IT Conference</h3>
+
+<div class="event-meta">
+<span><i class="fa-regular fa-clock"></i> 5:00 PM</span>
+<span><i class="fa-solid fa-location-dot"></i> IT Building</span>
+</div>
+
+<p>Conference organized by the Faculty of Information Technology.</p>
+
+</div>
+</div>
+
+
+<div class="must-event-card">
+<div class="event-img">
+<img src="{% static 'img/event3.png' %}">
+<div class="event-date">
+<span>09</span>
+<p>Dec</p>
+</div>
+</div>
+
+<div class="event-content">
+<h3>Annual Scientific Day</h3>
+
+<div class="event-meta">
+<span><i class="fa-regular fa-clock"></i> 10:00 AM</span>
+<span><i class="fa-solid fa-location-dot"></i> BioTech Hall</span>
+</div>
+
+<p>Annual scientific day of the College of Biotechnology.</p>
+
+</div>
+</div>
+
+
+<div class="must-event-card">
+<div class="event-img">
+<img src="{% static 'img/event4.jpeg' %}">
+<div class="event-date">
+<span>04</span>
+<p>Feb</p>
+</div>
+</div>
+
+<div class="event-content">
+<h3>Leadership Seminar</h3>
+
+<div class="event-meta">
+<span><i class="fa-regular fa-clock"></i> 9:30 AM</span>
+<span><i class="fa-solid fa-location-dot"></i> Main Hall</span>
+</div>
+
+<p>Leadership seminar organized with international partners.</p>
+
+</div>
+</div>
+
+</div>
+
+
+
+</section>
+{% endblock %}
