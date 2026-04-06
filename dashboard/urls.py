@@ -10,7 +10,8 @@ router.register(r'news', NewsViewSet)
 router.register(r'events', EventViewSet)
 router.register(r'sports', SportViewSet)
 router.register(r'registrations', RegistrationViewSet)  
-
-
 urlpatterns = [
+    # API routes
+    path('', include(router.urls)),
+
 ]

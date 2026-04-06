@@ -39,33 +39,18 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
-
-class Academy(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-
-
-class Course(models.Model):
-    academy = models.ForeignKey(Academy, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return f"{self.academy.name} - {self.name}"
-
-
+    
 class Registration(models.Model):
-    full_name = models.CharField(max_length=200)
-    university_id = models.CharField(max_length=50, unique=True)
-    phone = models.CharField(max_length=20)
-
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=150)
+    university_id = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=20)
+    match = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='registrations')
+    registered_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.full_name
+        return f"{self.full_name} -> {self.match}"
 
     class Meta:
-        # Prevents same university_id from registering for the same course twice
-        unique_together = ['university_id', 'course']
+        # Prevents same university_id from registering for the same match twice
+        unique_together = ['university_id', 'match']
 

@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from rest_framework import viewsets
 from .models import News, Event, Match, User, Registration
 from .serializers import NewsSerializer, UserSerializer, EventSerializer, SportSerializer, RegistrationSerializer
-from .forms import RegistrationForm
 
 # ── Page views ────────────────────────────────────────────────────────────────
 
@@ -66,11 +65,6 @@ class SportViewSet(viewsets.ModelViewSet):
     queryset = Match.objects.all()
     serializer_class = SportSerializer
 
-def register(request):
-    form = RegistrationForm(request.POST or None)
-
-    if form.is_valid():
-        form.save()
-        return redirect('success')  # أو نفس الصفحة
-
-    return render(request, 'form club.html', {'form': form})
+class RegistrationViewSet(viewsets.ModelViewSet):
+    queryset = Registration.objects.all()
+    serializer_class = RegistrationSerializer
